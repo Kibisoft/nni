@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="nni/nni.vcxitems" Id="a4a8f747-7297-4da6-96b6-9482b99c128a" />
+  <Project Path="UnitTests/UnitTests.vcxproj" />
+</Solution>
