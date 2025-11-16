@@ -50,8 +50,6 @@ namespace UnitTests
 			begin();
 			delete n;
 			end("delete tree");
-
-
 		}
 	};
 }
