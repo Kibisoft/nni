@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
 namespace nni
 {
@@ -13,15 +14,8 @@ namespace nni
 	class node : public leaf
 	{
 	public:
-		std::vector<leaf*> children;
-
+		std::vector<std::unique_ptr<leaf>> children;
 	public:
-		virtual ~node()
-		{
-			for (auto child : children)
-			{
-				delete child;
-			}
-		}
+		virtual ~node() {}
 	};
 }

@@ -23,17 +23,18 @@ namespace UnitTests
 		Logger::WriteMessage((message + ": " + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(duration).count()) + " ms\n").c_str());
 	}
 
-	static leaf* buildTree(int depth)
+	static std::unique_ptr<leaf> buildTreeUnique(int depth)
 	{
 		if (depth == 0)
 		{
-			return new leaf();
+			return std::make_unique<leaf>();
 		}
-		node* n = new node();
+		std::unique_ptr<node> n = std::make_unique<node>();
 		for (size_t i = 0; i < 8; ++i)
 		{
-			n->children.push_back(buildTree(depth - 1));
+			n->children.push_back(buildTreeUnique(depth - 1));
 		}
+
 		return n;
 	}
 
@@ -44,12 +45,12 @@ namespace UnitTests
 		TEST_METHOD(TestBuild)
 		{
 			begin();
-			node* n = dynamic_cast<node*>(buildTree(6));
-			end("build tree");
+			std::unique_ptr<leaf> n = buildTreeUnique(8);
+			end("build tree unique");
 
 			begin();
-			delete n;
-			end("delete tree");
+			n = nullptr;
+			end("delete tree unique");
 		}
 	};
 }
